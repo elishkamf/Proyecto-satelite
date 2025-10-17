@@ -3,4 +3,5 @@ Somos Germán Yassin y Elishka y en este repositorio presentamos nuestro trabajo
 
 El satélite capta datos del entorno (como temperatura, humedad y proximidad) y los envía a la estación de tierra, donde una interfaz desarrollada en Python permite visualizarlos y enviar comandos de control.
 Nuestro vídeo:
+
 https://youtu.be/voEOzH-IipM 
