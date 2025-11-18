@@ -7,7 +7,7 @@ La Versión 1 del proyecto establece la base del sistema de monitoreo entre el A
 Esta versión también permite controlar el envío de datos, pudiendo detenerlo y reanudarlo, y cuenta con alertas que avisan si hay problemas con el sensor o con la comunicación entre los Arduinos. Además, se hicieron pruebas para comprobar que tanto el sensor como la comunicación funcionen correctamente.
 La estructura creada en esta versión servirá como base para añadir funciones más avanzadas en las próximas fases del proyecto.
 
-### Video:
+#### Video:
 
 [Haz click Aquí si quieres ver nuestro video de la versión 1](https://youtu.be/voEOzH-IipM) 
 
