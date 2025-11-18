@@ -1,4 +1,4 @@
-# Proyecto-satelite
+# Proyecto-satelite Grupo 10
 Somos Germán Yassin y Elishka y en este repositorio presentamos nuestro trabajo sobre la implementación de un sistema satelital compuesto por un satélite y una estación de tierra.
 Versión 1:
 El satélite capta datos del entorno (temperatura, humedad) y los envía a la estación de tierra, donde una interfaz gráfica en Python permite visualizarlos en tiempo real en gráficas.
