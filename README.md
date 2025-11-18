@@ -6,6 +6,6 @@ El satélite capta datos del entorno (temperatura, humedad y distancia) y los en
 ![Foto del prototipo del satélite](https://github.com/elishkamf/Proyecto-satelite/blob/main/Fotovideotoutube.png)
 Videos:
 
-V1: 
+V1: [Haz click Aquí si quieres ver nuestro video de la versión 1](https://youtu.be/voEOzH-IipM) 
 
-V2: [https://youtu.be/voEOzH-IipM ](https://youtu.be/EIzg0IGf5FU)
+V2: [Haz click Aquí si quieres ver nuestro video de la versión 2](https://youtu.be/EIzg0IGf5FU)
