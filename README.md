@@ -7,5 +7,5 @@ El satélite capta datos del entorno (temperatura, humedad y distancia) y los en
 Videos:
 
 V1: [Haz click Aquí si quieres ver nuestro video de la versión 1](https://youtu.be/voEOzH-IipM) 
-![Foto del prototipo del satélite](https://youtu.be/voEOzH-IipM) 
+ 
 V2: [Haz click Aquí si quieres ver nuestro video de la versión 2](https://youtu.be/EIzg0IGf5FU)
