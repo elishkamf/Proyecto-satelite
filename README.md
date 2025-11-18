@@ -17,6 +17,6 @@ Versión 2:
 En la versión 2 del proyecto se añaden nuevas funciones al sistema de monitoreo. Ahora el satélite puede medir la distancia a objetos cercanos usando un sensor ultrasónico, y se calcula el promedio de los últimos 10 valores de temperatura para generar alertas cuando sea necesario.
 Video:
 
-V2: 
+Video:
 
 [Haz click Aquí si quieres ver nuestro video de la versión 2](https://youtu.be/EIzg0IGf5FU)
