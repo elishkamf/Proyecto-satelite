@@ -19,3 +19,12 @@ En la versión 2 del proyecto se añaden nuevas funciones al sistema de monitore
 #### Video:
 
 [Haz click Aquí si quieres ver nuestro video de la versión 2](https://youtu.be/EIzg0IGf5FU)
+
+
+## Versión 3:
+
+En la Versión 3 añadimos nuevas funciones al sistema, como el envío de la posición del satélite y la posibilidad de elegir el modo de funcionamiento del sensor de distancia. El usuario también puede cambiar el periodo de envío de cada tipo de dato e introducir observaciones en cualquier momento.
+La interfaz gráfica incluye nuevas gráficas dinámicas, entre ellas la representación 2D de la posición, y permite consultar los eventos registrados. Además, el sistema funciona ahora con comunicación inalámbrica y usa checksum para asegurar la integridad de los mensajes.
+
+### Video:
+
