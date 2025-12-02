@@ -29,5 +29,5 @@ En la Versión 3 añadimos nuevas funciones al sistema, como el envío de la pos
 La interfaz gráfica incluye nuevas gráficas dinámicas, entre ellas la representación 2D de la posición, y permite consultar los eventos registrados. Además, el sistema funciona ahora con comunicación inalámbrica y usa checksum para asegurar la integridad de los mensajes.
 </div>
 
-### Video:
+#### Video:
 
