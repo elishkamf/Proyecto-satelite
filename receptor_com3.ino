@@ -1,21 +1,29 @@
 #include <SoftwareSerial.h>
 
 
-// Comunicación con el Arduino Emisor
-#define RX_PIN 10       // Conectado al TX del emisor
-#define TX_PIN 11       // Conectado al RX del emisor
+#define RX_PIN 10  
+#define TX_PIN 11  
+#define LED_VERDE 13    
+#define LED_AMARILLO 7  
+#define LED_ROJO 6      
 
 
-#define LED_VERDE 13    // Indica recepción correcta de datos de Temp/Hum
-#define LED_AMARILLO 7  // Alarma de comunicación (sin datos)
-#define LED_ROJO 6      // Alarma de fallo del sensor
+SoftwareSerial emisor(RX_PIN, TX_PIN);
 
 
-SoftwareSerial emisor(RX_PIN, TX_PIN);  // Comunicación con Arduino emisor
+unsigned long ultimoMensaje = 0;
+bool falloComunicacion = false;
 
 
-unsigned long ultimoMensaje = 0;  // Marca de tiempo del último mensaje
-bool falloComunicacion = false;   // Estado de comunicación
+// ----------- FUNCION CHECKSUM -----------
+uint8_t calcularChecksum(String mensaje) {
+  uint16_t suma = 0;
+  for (unsigned int i = 0; i < mensaje.length(); i++) {
+    suma += (uint8_t)mensaje[i];
+  }
+  return suma % 256;
+}
+// ----------------------------------------
 
 
 void setup() {
@@ -31,7 +39,7 @@ void setup() {
   Serial.println("🌍 Estación Tierra lista");
 
 
-  // Enviar comando inicial al emisor
+  // Enviar comando inicial (opcional)
   emisor.print('T');
   digitalWrite(LED_VERDE, HIGH);
   delay(500);
@@ -40,65 +48,83 @@ void setup() {
 
 
 void loop() {
-  // --- Cambio de modo desde Python ---
+  // --- Reenviar comandos del PC al emisor por LoRa ---
   if (Serial.available()) {
     char comando = Serial.read();
-    if (comando == 'T' || comando == 'D' || comando == 'U' || comando == 'P') {
-      emisor.print(comando);  // Reenviar comando al emisor
+    if (comando == 'T' || comando == 'D' || comando == 'U' || comando == 'P' || comando == 'O') {
+      emisor.print(comando);
     }
   }
 
 
-  // --- Si llegan datos del emisor ---
+  // --- Procesar mensajes del emisor ---
   if (emisor.available()) {
     String linea = emisor.readStringUntil('\n');
     linea.trim();
 
 
-    if (linea.length() > 0) {
-      Serial.println(linea);        // Reenviar al PC
-      ultimoMensaje = millis();     // Actualiza tiempo de último mensaje
-      falloComunicacion = false;    // Comunicación OK
-      digitalWrite(LED_AMARILLO, LOW);
+    // Verificar checksum
+    int separador = linea.lastIndexOf('*');
+    if (separador == -1) {
+      Serial.println("MENSAJE_DESCARTADO_SIN_CHECKSUM");
+      return;
+    }
 
 
-      // ---- CONTROL DE LED VERDE ----
-      // Solo se enciende si la línea contiene datos de temperatura/humedad
-      int comaIndex = linea.indexOf(',');
-      if (comaIndex > 0) {
-        // Verificar que haya dos números
-        String tempStr = linea.substring(comaIndex + 1);
-        tempStr.trim();
-        bool validos = true;
-        for (unsigned int i = 0; i < tempStr.length(); i++) {
-          char c = tempStr[i];
-          if (!isDigit(c) && c != '.') validos = false;
-        }
-        if (validos) {
-          delay(100);
-          digitalWrite(LED_VERDE, HIGH);
-          delay(50);
-          digitalWrite(LED_VERDE, LOW);
-        }
+    String datos = linea.substring(0, separador);
+    String checksumStr = linea.substring(separador + 1);
+
+
+    uint8_t csRecibido = checksumStr.toInt();
+    uint8_t csCalculado = calcularChecksum(datos);
+
+
+    if (csRecibido != csCalculado) {
+      Serial.println("MENSAJE_CORRUPTO_DESCARTADO");
+      return;
+    }
+
+
+    // Enviar datos válidos al PC (Python)
+    Serial.println(datos);
+   
+    // Resetear temporizador de fallo
+    ultimoMensaje = millis();
+    falloComunicacion = false;
+    digitalWrite(LED_AMARILLO, LOW);
+
+
+    // LED verde para datos de temperatura/humedad válidos
+    int comaIndex = datos.indexOf(',');
+    if (comaIndex > 0) {
+      String tempStr = datos.substring(comaIndex + 1);
+      tempStr.trim();
+      bool validos = true;
+      for (unsigned int i = 0; i < tempStr.length(); i++) {
+        char c = tempStr[i];
+        if (!isDigit(c) && c != '.') validos = false;
       }
-
-
-      // ---- CONTROL LED ROJO ----
-      if (linea == "FALLO_SENSOR" || linea == "FALLO_ULTRASONICO") {
-        digitalWrite(LED_ROJO, HIGH);
-      } else {
-        digitalWrite(LED_ROJO, LOW);
+      if (validos) {
+        delay(100);
+        digitalWrite(LED_VERDE, HIGH);
+        delay(50);
+        digitalWrite(LED_VERDE, LOW);
       }
+    }
+
+
+    // LED rojo SOLO para fallos
+    if (datos == "FALLO_SENSOR" || datos == "FALLO_ULTRASONICO") {
+      digitalWrite(LED_ROJO, HIGH);
+    } else {
+      digitalWrite(LED_ROJO, LOW);
     }
   }
 
 
-  // --- Verificación de comunicación ---
+  // --- Detección de timeout ---
   if (millis() - ultimoMensaje > 5000 && !falloComunicacion) {
     falloComunicacion = true;
     digitalWrite(LED_AMARILLO, HIGH);
   }
 }
-
-
-
