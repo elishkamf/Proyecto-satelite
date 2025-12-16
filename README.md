@@ -15,7 +15,7 @@ La estructura creada en esta versión servirá como base para añadir funciones 
 
 ## Versión 2:
 
-![Interfaz en acción](documentos/universidad/cc1.gif)
+![Sensor ultrasónico](imagenesproyecto/sensorultrasonico.gif)
 
 <div align="justify">
 En la versión 2 del proyecto se añaden nuevas funciones al sistema de monitoreo. Ahora el satélite puede medir la distancia a objetos cercanos usando un sensor ultrasónico, y se calcula el promedio de los últimos 10 valores de temperatura para generar alertas cuando sea necesario.
@@ -33,4 +33,18 @@ La interfaz gráfica incluye nuevas gráficas dinámicas, entre ellas la represe
 </div>
 
 #### Video:
+[Haz click Aquí si quieres ver nuestro video de la versión 3](https://youtu.be/IpSjRsUi1uI)
+
+
+## Versión 4:
+<div align="justify">
+En la Versión 4 añadimos nuevas funciones avanzadas al sistema. Ahora podemos utilizar un mando para desplazarnos por la interfaz gráfica de forma cómoda e intuitiva, lo que permite interactuar con el sistema sin necesidad de teclado o ratón y mejora la experiencia de usuario.
+
+Además, hemos incorporado un sistema de seguridad para proteger el acceso a los datos y a la interfaz gráfica. Se ha diseñado un sistema de inicio de sesión en el que, si el usuario falla tres veces consecutivas al introducir las credenciales, se activa un bloqueo temporal que impide el acceso a la aplicación durante un periodo de tiempo determinado, aumentando así la seguridad del sistema.
+
+Finalmente, hemos añadido una alerta de proximidad que se activa cuando el radar detecta un objeto a menos de 10 cm de distancia. Esta alerta permite reaccionar rápidamente ante posibles riesgos, simulando un sistema de prevención de colisiones similar al que se utiliza en satélites reales.
+</div>
+
+#### Video:
+[Haz click Aquí si quieres ver nuestro video de la versión 4]()
 
