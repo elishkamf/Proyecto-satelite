@@ -46,5 +46,5 @@ Finalmente, hemos añadido una alerta de proximidad que se activa cuando el rada
 </div>
 
 #### Video:
-[Haz click Aquí si quieres ver nuestro video de la versión 4]()
+[Haz click Aquí si quieres ver nuestro video de la versión 4](https://youtu.be/Ag7suqHA7qw)
 
